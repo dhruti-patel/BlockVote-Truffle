@@ -1,0 +1,37 @@
+<! DOCTYPE html>
+<html lang=”en”>
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Vote</title>
+<!--<link rel="stylesheet" type="text/css" href="index.css">-->
+<!--<script src="./node_modules/web3/dist/web3.min.js"></script>-->
+<!--<link href='./bootstrap.min.css' rel='stylesheet' type='text/css'>-->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<form onSubmit="App.voteForCandidate(); return false;">
+ <div class="container">
+<h2 id="instructor">Vote Here</h2>
+<div id="ID">Your Account ID: </div>
+<label for="name" class="col-lg-2 control-label">Voter Id</label>
+ <input id="vvid" type="text">
+<!--<label for=”name” class=”col-lg-2 control-label”>Instructor Age</label>
+ <input id=”age” type=”text”>-->
+<!--<button id="button">Register voter</button>-->
+<!--<a href="#" onclick="registerVoter()" class="btn btn-primary" id="register">Right to Vote</a>-->
+<input type="submit" class="btn btn-primary" value="Vote">
+
+</div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+<script src="./js/bootstrap.min.js"></script>
+<!--<script src="./js/web3.min.js"></script>-->
+<script src="./js/truffle-contract.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>
