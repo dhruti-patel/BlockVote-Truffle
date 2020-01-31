@@ -124,7 +124,65 @@ $('#hash').html("hash will be generated")
 
   },
 
-registerVoter: async() =>{
+registerVoter: async(lines)=>
+{
+  
+  
+  //alert('register voter');
+  if(isNaN(lines[0]))
+    
+    {
+    //alert('not a number :'+lines[0]); 
+    }
+    else{
+      
+    //alert('is a number'+lines[0]);  
+      
+    }
+    
+    
+    if(typeof lines[1] == 'string')
+    
+    {
+    //alert('is string :'+lines[1]);  
+    }
+    else{
+      
+    //alert('else :'+lines[1]); 
+      
+    }
+    
+    if(typeof lines[2] == 'string')
+    
+    {
+      //alert('is string :'+lines[2]);
+      
+    }
+    else{
+      //alert('else :'+lines[2]);
+      
+      
+    }
+  
+console.log(lines);
+//var balance= web3.eth.getBalance(web3.eth.accounts[0]);
+var v = await App.voting.voters(lines[0])
+//contractInstance.giveRightToVote(r, {from: web3.eth.accounts[0]});
+if(v[0]==lines[0])
+{
+  alert("Already given the right");
+}
+else
+{
+ await App.voting.giveRightToVote(lines[0],lines[1],lines[2],{from: web3.eth.accounts[0],gas:3000000});
+    //alert('added');
+    
+  }
+  
+      
+ },
+
+/*registerVoter: async() =>{
 var r = document.getElementById("Id").value;
 var v = await App.voting.voters(r)
 //contractInstance.giveRightToVote(r, {from: web3.eth.accounts[0]});
@@ -136,7 +194,7 @@ else
 {
 await App.voting.giveRightToVote(r)
 }
- },
+ },*/
 
 voterRegistration: async()=>{
 var r = document.getElementById("Voterid").value;
@@ -171,8 +229,7 @@ await App.voting.registerToVote(r);
   } 
   today = dd + '/' + mm + '/' + yyyy;
 
-
-  if(dd>ddV && mm>=mmV && yyyy>=yyyyV){    
+if(dd>ddV && mm>=mmV && yyyy>=yyyyV){    
     alert("Voting is closed");    
   }
   else if(dd<ddS && mm<=mmS && yyyy<=yyyyS)

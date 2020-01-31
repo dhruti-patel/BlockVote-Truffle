@@ -7,6 +7,8 @@ contract evote {
         uint8 vote;
         bool registered;
         address vadd;
+        string email;
+        string constituency;
     }
     
     struct Candidate {
@@ -20,7 +22,7 @@ contract evote {
     }
     
     address admin;
-    uint256 public voterCount=0;
+    uint256 voterCount=0;
     mapping(uint => Voter) public voters;
     mapping(address=> VoterId) public voterids;
     mapping(uint => Candidate) public candidates;
@@ -29,19 +31,21 @@ contract evote {
     constructor() public {
         admin = msg.sender;
         addCandidate("Candidate 1");
-    addCandidate("Candidate 2");
-    addCandidate("Candidate 3");
+        addCandidate("Candidate 2");
+        addCandidate("Candidate 3");
         }
         
     function addCandidate (string memory _name) private {
-    candidatesCount ++;
-    candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
-  }
+        candidatesCount ++;
+        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+    }
     
-    function giveRightToVote(uint toVoter) public {
+    function giveRightToVote(uint toVoter, string memory em, string memory cons) public {
         if (msg.sender != admin) return;
         voterCount+=1;
         voters[toVoter].vid = toVoter;
+        voters[toVoter].email = em;
+        voters[toVoter].constituency = cons;
         
     }
     //need to include otp thing

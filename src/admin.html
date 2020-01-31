@@ -12,21 +12,89 @@
 </head>
 
 <body>
-	<form onSubmit="App.registerVoter(); return false;">
+	<form onSubmit="handleFiles(); return false;">
  <div class="container">
 <h1></h1>
 <h2 id="instructor">GIVE RIGHT TO VOTE</h2>
-<label for="name" class="col-lg-2 control-label">Voter Id</label>
- <input id="Id" type="text">
+<label for="name" class="col-lg-2 control-label">Upload Voter details</label>
+ <input type="file" id="csvFileInput" accept=".csv">
 <!--<label for=”name” class=”col-lg-2 control-label”>Instructor Age</label>
  <input id=”age” type=”text”>-->
 <!--<button id="button">Register voter</button>-->
 <!--<a href="#" onclick="registerVoter()" class="btn btn-primary" id="register">Right to Vote</a>-->
-<input type="submit" class="btn btn-primary" value="Register Voter">
+<input type="submit" class="btn btn-primary" value="Upload">
 
 </div>
 </form>
+<script>
+	function handleFiles() {
 
+  // Check for the various File API support.
+  var fileInput= document.getElementById("csvFileInput");
+  console.log(fileInput.files[0]);
+  if (window.FileReader) {
+    // FileReader are supported.
+    getAsText(fileInput.files[0]);
+     
+    
+    //alert('FileReader is supported in this browser.');
+  } else {
+    //alert('FileReader are not supported in this browser.');
+  }
+}
+
+function getAsText(fileToRead) {
+
+  var reader = new FileReader();
+  // Handle errors load
+  
+  //alert('getastext');
+  reader.onload = loadHandler;
+  reader.onerror = errorHandler;
+  // Read file into memory as UTF-8      
+  reader.readAsText(fileToRead);
+}
+
+function loadHandler(event) {
+  //alert('loadhandler');
+  var csv = event.target.result;
+  processData(csv);             
+}
+
+
+function errorHandler(evt) {
+
+  
+  alert('errorHandler');
+  if(evt.target.error.name == "NotReadableError") {
+    alert("Cannot read file !");
+  }
+}
+
+       function processData(csv) {
+       
+       //alert('processData');
+        let allTextLines = csv.split(/\r\n|\n/);
+    
+    
+    len = allTextLines.length;
+    
+    //alert('len is = '+len);
+    
+    for(var l=0; l< len; l++)
+    {
+      var lines = [];
+      lines=allTextLines.shift().split(',');
+      App.registerVoter(lines);
+
+      
+    }
+  
+  //console.log(lines);
+          
+
+        }
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
 <script src="./js/bootstrap.min.js"></script>
