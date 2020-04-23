@@ -12,21 +12,73 @@
 </head>
 
 <body>
-	<form onSubmit="App.voteForCandidate(); return false;">
+		<h2 id="instructor">Login</h2>
+		<div>
+				<span id="ID">Your Account ID: </span>
+			</div>
+<form onSubmit="App.checkLogin(); return false;">
  <div class="container">
-<h2 id="instructor">Vote Here</h2>
-<div id="ID">Your Account ID: </div>
-<label for="name" class="col-lg-2 control-label">Voter Id</label>
- <input id="vvid" type="text">
-<!--<label for=”name” class=”col-lg-2 control-label”>Instructor Age</label>
- <input id=”age” type=”text”>-->
-<!--<button id="button">Register voter</button>-->
-<!--<a href="#" onclick="registerVoter()" class="btn btn-primary" id="register">Right to Vote</a>-->
-<input type="submit" class="btn btn-primary" value="Vote">
-
+	
+	<label for="name" class="col-lg-2 control-label">Voter Id</label>
+		 <input id="vvid" type="text">
+		</div>
+		<br>
+		<div class="container">
+	<label for="name" class="col-lg-2 control-label">Secret Message</label>
+		 <input id="sec_msg" type="text">
+		 </div>
+		 <br>
+		 <div class="container">	 
+	<label for="name" class="col-lg-2 control-label">Secret Number:</label>
+		 <input id="sec_num" type="text">
+	<input type="submit">
 </div>
+<br>
 </form>
+<div class="container">
+<form onSubmit="App.voteForCandidate(); return false;">		 
+		 <table class="table">
+			<thead>
+			  <tr>
+				<!-- <th scope="col">#</th> -->
+				<th scope="col">Name</th>
+				<th scope="col">Party</th>
+				<th scope="col">Party Symbol</th>
+			  </tr>
+			</thead>
+			<tbody id="candidatesList">
+			</tbody>
+		  </table>
 
+<input type="submit" class="btn btn-primary" value="Vote">
+</form>
+</div>
+
+<!-- adding firebase proj-->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCkEtyqE9vpFy4tQe5YLk1ce20m7CDuP9w",
+    authDomain: "nodemail-63bf8.firebaseapp.com",
+    databaseURL: "https://nodemail-63bf8.firebaseio.com",
+    projectId: "nodemail-63bf8",
+    storageBucket: "nodemail-63bf8.appspot.com",
+    messagingSenderId: "428804642507",
+    appId: "1:428804642507:web:43c8377a4f0c608faaad4e"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
 <script src="./js/bootstrap.min.js"></script>
