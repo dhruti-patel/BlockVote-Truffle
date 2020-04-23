@@ -1,0 +1,56 @@
+<! DOCTYPE html>
+<html lang=”en”>
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Dashboard</title>
+<!--<link rel="stylesheet" type="text/css" href="index.css">-->
+<!--<script src="./node_modules/web3/dist/web3.min.js"></script>-->
+<!--<link href='./bootstrap.min.css' rel='stylesheet' type='text/css'>-->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  
+ <div class="container">
+<a href="admin.html"  class="btn btn-primary" id="register">Admin Dashboard</a>
+<hr>
+<a href="registration.html"  class="btn btn-primary" id="register">Register</a>
+<hr>
+<a href="vote.html"  class="btn btn-primary" id="register">Vote</a>
+
+</div>
+<!-- adding firebase proj-->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCkEtyqE9vpFy4tQe5YLk1ce20m7CDuP9w",
+    authDomain: "nodemail-63bf8.firebaseapp.com",
+    databaseURL: "https://nodemail-63bf8.firebaseio.com",
+    projectId: "nodemail-63bf8",
+    storageBucket: "nodemail-63bf8.appspot.com",
+    messagingSenderId: "428804642507",
+    appId: "1:428804642507:web:43c8377a4f0c608faaad4e"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+<script src="./js/bootstrap.min.js"></script>
+<!--<script src="./js/web3.min.js"></script>-->
+<script src="./js/truffle-contract.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

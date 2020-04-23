@@ -1,0 +1,9 @@
+Prerequisites:
+metamask extension in your browser (browser must be compatible with metamask)
+Nodejs
+Ganache
+
+Steps to run the project:
+1. Download the github repo
+2. run "npm install" in your project directory
+3. run "npm run dev" to start the project in your browser
