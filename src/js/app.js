@@ -331,9 +331,14 @@ $("#ID").html("Your Account ID: "+account);
   console.log(hash_new)
   var v = await App.voting.voters(r);
   var x = await App.voting.voterids(account);
+  var currentTime= Math.floor(new Date().getTime()/1000.0);
+  var svd= await App.voting.startVote();
+  var evd= await App.voting.endVote();
   //var check = x[2].localeCompare(secret_message)
   console.log(x[1])
   //v[3]==true && v[0] == x[0] && 
+  if(currentTime>svd && currentTime<=evd)
+   {
   if (hash_new == x[1])
   {
     alert("You have successfully logged in");
@@ -347,6 +352,17 @@ $("#ID").html("Your Account ID: "+account);
   alert("Sorry, Wrong Credentials")
   //await App.renderCandidates();
   }
+}
+else if(currentTime>evd)
+  {
+   alert("Voting period is over :( ");
+  }
+  else
+  {
+    alert("Voting is not started yet.")
+    console.log(v[1])
+  }
+
    },
 
  voteForCandidate: async()=> {
@@ -373,14 +389,12 @@ $("#ID").html("Your Account ID: "+account);
 //   else{
      var r = document.getElementById("vvid").value;
      var v = await App.voting.voters(r);
-     var currentTime= Math.floor(new Date().getTime()/1000.0);
-     var svd= await App.voting.startVote();
-    var evd= await App.voting.endVote();
+    //  var currentTime= Math.floor(new Date().getTime()/1000.0);
+    //  var svd= await App.voting.startVote();
+    // var evd= await App.voting.endVote();
     var account = await App.voting.voters(r)[4];
     console.log(account)
      $("#ID").html(account);
-    if(currentTime>svd && currentTime<=evd)
-    {
     if(v[1]==true)
     {
       alert("You have already voted");
@@ -400,16 +414,7 @@ $("#ID").html("Your Account ID: "+account);
     alert("Thank you for Voting!")
     //{from: account} 
     }
-  }
-  else if(currentTime>evd)
-  {
-   alert("Voting period is over :( ");
-  }
-  else
-  {
-    alert("Voting is not started yet.")
-    console.log(v[1])
-  }
+ 
  },
 
 checkRegistration: async()=>
@@ -634,6 +639,11 @@ checkTime: async()=>{
   var svd= await App.voting.startVote();
   console.log(evd);
   console.log(currentTime);
+  var account = web3.currentProvider.selectedAddress
+  var admin_account= await App.voting.admin();
+  if (account!=admin_account) alert("You don't have rights to access this option")
+  else
+  {
   if (currentTime>evd) 
     {
       //document.getElementById("results").disabled = false;
@@ -649,6 +659,7 @@ else if(currentTime<=svd)
   alert("Voters are voting yet.Please Wait!!!");
 
 }
+}
 },
 getVoterInfo: async() =>{
   var vid = document.getElementById("vid").value;
@@ -663,6 +674,7 @@ getVoterInfo: async() =>{
 setVotingDates: async() =>{
 var svd= document.getElementById("svd").value;
 var evd= document.getElementById("evd").value;
+var currentTime= Math.floor(new Date().getTime()/1000.0);
 var sdo = new Date(svd);
 var edo = new Date(evd);
 // var so= sdo.toUTCString();
@@ -672,8 +684,10 @@ var e= Date.UTC(edo.getUTCFullYear(),edo.getUTCMonth(),edo.getUTCDate(),edo.getU
 await App.voting.setDates(s/1000.0,e/1000.0);
 // App.startDate=svd;
 // App.endDate=evd;
-console.log(await App.voting.startVote())
-console.log(await App.voting.endVote())
+console.log("start"+ await App.voting.startVote())
+console.log("end" + await App.voting.endVote())
+console.log("current" + currentTime)
+//console.log(sdo.getUTCFullYear(),sdo.getUTCMonth(),sdo.getUTCDate(),sdo.getUTCHours(),sdo.getUTCMinutes())
 }
 
 

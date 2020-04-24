@@ -34,7 +34,7 @@ contract evote {
         
     }
     
-    address admin;
+    address public admin;
     uint256 public voterCount=0;
     mapping(uint => Voter) public voters;
     mapping(address=> VoterId) public voterids;
@@ -43,8 +43,8 @@ contract evote {
     uint public candidatesCount;
     bool public constituency_exist = false;
     uint public constituencyCount;
-    uint public startVote;
-    uint public endVote;
+    uint256 public startVote;
+    uint256 public endVote;
     uint public nowTime; 
    
     constructor() public {
