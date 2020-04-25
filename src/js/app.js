@@ -339,7 +339,7 @@ $("#ID").html("Your Account ID: "+account);
   //v[3]==true && v[0] == x[0] && 
   if(currentTime>svd && currentTime<=evd)
    {
-  if (hash_new == x[1])
+  if (v[3]==true && r==x[0] && hash_new == x[1])
   {
     alert("You have successfully logged in");
     // var account = web3.currentProvider.selectedAddress
