@@ -4,6 +4,8 @@ App =
   contracts: {},
   db:firebase.firestore(),
   gen_otp:null,
+  secretMsg:null, refNo:0,
+  login_attempts: 3,
   qOTP:null, eOTP:null, resend:0, re_email:null,mins: 15,secs:15 * 60,startDate:0,endDate:0,
 
   load: async () => {
@@ -121,6 +123,41 @@ App =
     }
   },
 
+  getList: async () => {
+    // Load the total task count from the blockchain
+    const c_id = document.getElementById("cid").value;
+    
+    const candidateCount = await App.voting.candidatesCount()
+    var candidatesResult = $("#candidatesResult")
+    candidatesResult.empty()
+    // Render out each task with a new task template
+    for (var i = 1; i <= candidateCount; i++) {
+      // Fetch the task data from the blockchain
+      console.log(i+""+i*100)
+      var key = i*100
+      const candidate = await App.voting.candidates(key)
+      const cid = candidate[0].toNumber()
+      console.log("candidates cid:"+cid)
+      const can_name = candidate[1]
+      const votes = candidate[2]
+      const party_name = candidate[5]
+      const constituencyId = candidate[3].toNumber()
+      const constituencyName = candidate[4]
+      
+      if(c_id == constituencyId)
+      {
+        console.log(i+" "+cid+" "+can_name)
+        var candidateTemplate = "<tr><td>" + can_name + "</td><td>" + party_name +  "</td><td><img class='rounded-circle' src='./static/"+party_name+".png' height='100' width='100'></td>></tr>"
+        candidatesResult.append(candidateTemplate);
+      }
+      else{
+        console.log("else part")
+        continue;
+      }
+    }
+    //console.log(await App.voting.endVote())
+  },
+
   getResults: async () => {
     // Load the total task count from the blockchain
     const c_id = document.getElementById("cid").value;
@@ -141,11 +178,6 @@ App =
       const party_name = candidate[5]
       const constituencyId = candidate[3].toNumber()
       const constituencyName = candidate[4]
-      // console.log("voter's con name:"+con_id)
-      // console.log("candidates con name:"+constituencyId)
-      // console.log("candidates con name:"+constituencyName)
-      //var check = con_name.localeCompare(constituencyId)
-      //console.log("string match:"+check)
       
       if(c_id == constituencyId)
       {
@@ -171,6 +203,7 @@ App =
 
     // generate random numbers
     var randomString = '';
+    secretMsg = '';
     var flag;
 
     for(let i = 1; i <= SMlength; i++) 
@@ -194,18 +227,21 @@ App =
 var Ins= "IMPORTANT: Store this secret message and number, it will needed during login, it wont be available again."
 $('#instruction').html(Ins)
 $('#secret_msg').html(randomString)
+secretMsg = randomString;
 
 var RNlength=Math.floor(Math.random() * (7 - 4) ) + 4; 
     console.log("RNlength"+RNlength);
 
 
 var randomNo = '';
+refNo = '';
 for(let i = 1; i <= RNlength; i++) {
     let randomDigit = Math.floor(Math.random() * 10);
     console.log(randomDigit);
     randomNo = randomNo + randomDigit;
 }
 $('#secret_no').html(randomNo)
+refNo = randomNo;
 var strConcat=randomString.concat(randomNo)
 console.log(strConcat)
 var account = web3.currentProvider.selectedAddress
@@ -213,6 +249,40 @@ var account = web3.currentProvider.selectedAddress
   //var x = await App.voting.voterids(account);
   console.log(hash)
   await App.voting.storeHash(hash);
+  },
+
+  secretEmail: async() =>{
+    vid = document.getElementById("Voterid").value;
+    var v = await App.voting.voters(vid);
+    // secretMsg= document.getElementById("secret_msg").value ;
+    // refNo= document.getElementById("secret_no").value ;
+    // store vid, email, secret msg and ref no
+  
+    App.db.collection("values").doc(vid).set({
+      email: v[5],
+      secretMsg: secretMsg,
+      refNo: refNo
+    })
+    .then(function() {
+      console.log("Document with values successfully written!");
+    })
+    .catch(function(error) {
+      console.error("Error writing values to document: ", error);
+    });
+  
+  },
+  
+  deleteValues: async() =>{
+    vid = document.getElementById("Voterid").value;
+  
+    // store vid, email, secret msg and ref no
+  
+    db.collection("values").doc(vid).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+  
   },
 
 registerVoter: async(lines)=>
@@ -275,7 +345,7 @@ else
  registerCandidate: async(lines)=>
 {
   
-//console.log(lines);
+console.log(lines);
 //var balance= web3.eth.getBalance(web3.eth.accounts[0]);
 var v = await App.voting.candidates(lines[0])
 var votes = 0;
@@ -339,9 +409,13 @@ $("#ID").html("Your Account ID: "+account);
   //v[3]==true && v[0] == x[0] && 
   if(currentTime>svd && currentTime<=evd)
    {
-  if (v[3]==true && r==x[0] && hash_new == x[1])
+     if(x[0]==r)
+     {
+  if (v[3]==true && hash_new == x[1])
   {
     alert("You have successfully logged in");
+    document.getElementById("loginDiv").style.display = "none";
+    document.getElementById("canDiv").style.display = "block";
     // var account = web3.currentProvider.selectedAddress
     // console.log(account)
   $("#ID").html("Your account ID: "+v[4]);
@@ -349,9 +423,27 @@ $("#ID").html("Your Account ID: "+account);
   }
   else
   {
-  alert("Sorry, Wrong Credentials")
-  //await App.renderCandidates();
+    App.login_attempts=App.login_attempts-1;
+    if(App.login_attempts==0)
+    {
+     alert("No Login Attempts Available");
+      document.getElementById("vvid").disabled=true;
+      document.getElementById("sec_msg").disabled=true;
+      document.getElementById("sec_num").disabled=true;
+      document.getElementById("login").disabled=true;
+      document.getElementById("loginDiv").style.display = "none";
+      document.getElementById("blocked").style.display = "block";
+    }
+    else
+    {
+     alert("Sorry, Wrong Credentials, Login Failed Now Only "+App.login_attempts+" Login Attempts Available");
+    }
   }
+}
+else
+{
+  alert("Metamask account doesn't match with the registered account")
+}
 }
 else if(currentTime>evd)
   {
@@ -366,38 +458,16 @@ else if(currentTime>evd)
    },
 
  voteForCandidate: async()=> {
-//    var today = new Date();
-//    console.log(today)
-//   var dd = today.getDate();
-//   var mm = today.getMonth()+1; //January is 0!
-//   var yyyy = today.getFullYear();
-//   if(dd<20) {
-//     dd = '0'+dd
-//   } 
-//   if(mm<10) {
-//     mm = '0'+mm
-//   } 
-//   today = dd + '/' + mm + '/' + yyyy;
-
-// if(dd>ddV && mm>=mmV && yyyy>=yyyyV){    
-//     alert("Voting is closed");    
-//   }
-//   else if(dd<ddS && mm<=mmS && yyyy<=yyyyS)
-//   {
-//     alert("Voting starts on "+dateS);
-//   }
-//   else{
      var r = document.getElementById("vvid").value;
      var v = await App.voting.voters(r);
-    //  var currentTime= Math.floor(new Date().getTime()/1000.0);
-    //  var svd= await App.voting.startVote();
-    // var evd= await App.voting.endVote();
     var account = await App.voting.voters(r)[4];
     console.log(account)
      $("#ID").html(account);
     if(v[1]==true)
     {
       alert("You have already voted");
+      document.getElementById("canDiv").style.display = "none";
+      document.getElementById("thankyou").style.display = "block";
     }
     else
     {
@@ -411,7 +481,9 @@ else if(currentTime>evd)
     console.log("e:"+e)
     //var candidateName = e;  
     await App.voting.vote(e);
-    alert("Thank you for Voting!")
+    document.getElementById("canDiv").style.display = "none";
+    document.getElementById("thankyou").style.display = "block";
+    //alert("Thank you for Voting!")
     //{from: account} 
     }
  
@@ -419,19 +491,22 @@ else if(currentTime>evd)
 
 checkRegistration: async()=>
 {
-
-
-  var vid = document.getElementById("Voterid").value;
-  console.log(vid);
-  var v = await App.voting.voters(vid);
-  console.log(v[0]);
-  if(vid==null || vid=="")
+  var vid1 = document.getElementById("Voterid").value;
+  var vt = await App.voting.voters(vid1); 
+  console.log(vid1);
+  console.log(vt[0]);
+  var currentTime= Math.floor(new Date().getTime()/1000.0);
+  var svd= await App.voting.startVote();
+  var evd= await App.voting.endVote();
+  if (currentTime<svd)
+  {
+  if(vid1==null || vid1=="")
   alert("Enter vid");
-else if(v[0]==0)
+else if(vt[0]==0)
 {
   alert("You are not a valid voter");
 }
-else if (v[3]==true)
+else if (vt[3]==true)
 {
   alert("You are already registered");
 }
@@ -450,6 +525,15 @@ else if (v[3]==true)
   //     console.log("Error getting document:", error);
   // });
   }
+}
+else if(currentTime>evd)
+{
+  alert("Voting period is over")
+}
+else
+{
+  alert("The registrations are closed")
+}
 },
 
 generateOTP: async()=>
@@ -671,6 +755,31 @@ getVoterInfo: async() =>{
   $('#voted').html(voted.toString())
 
 },
+
+cancelReg: async() =>{
+  var vid = document.getElementById("vid2").value;
+  var v = await App.voting.voters(vid); 
+  var registered = v[3]
+  var voted = v[1]
+  console.log(registered+" "+voted)
+  var account = web3.currentProvider.selectedAddress
+  var admin_account= await App.voting.admin();
+  if (account!=admin_account) alert("You don't have rights to access this option")
+  else
+  {
+  if(v[1]== true){
+    alert("The citizen has already voted")
+  }
+  else if(v[3]== false){
+    alert("The citizen has not registered")
+  }
+  else{
+    await App.voting.cancelReg(vid);
+  }
+}
+
+},
+
 setVotingDates: async() =>{
 var svd= document.getElementById("svd").value;
 var evd= document.getElementById("evd").value;
@@ -692,9 +801,6 @@ console.log("current" + currentTime)
 
 
 }
-
-
-
 $(() => {
   $(window).load(() => {
     App.load()

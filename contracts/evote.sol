@@ -50,7 +50,11 @@ contract evote {
     constructor() public {
         admin = msg.sender;
         }
-    
+    function cancelReg (uint voter_id) public{
+        if (msg.sender != admin) return;
+        voters[voter_id].registered = false;
+    }
+
     function setDates (uint startv,uint endv) public{
         if (msg.sender != admin) return;
         startVote=startv;

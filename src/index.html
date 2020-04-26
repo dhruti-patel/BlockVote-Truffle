@@ -1,18 +1,18 @@
-<! DOCTYPE html>
+<!DOCTYPE html>
 <html lang=”en”>
-<head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <title>Dashboard</title>
-<!--<link rel="stylesheet" type="text/css" href="index.css">-->
-<!--<script src="./node_modules/web3/dist/web3.min.js"></script>-->
-<!--<link href='./bootstrap.min.css' rel='stylesheet' type='text/css'>-->
-<link href="./css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-  
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Home - BlockVote</title>
+        <link rel="stylesheet" href="assets_home/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700">
+        <link rel="stylesheet" href="assets_home/fonts/font-awesome.min.css">
+        <!-- <link href="./css/bootstrap.min.css" rel="stylesheet"> -->
+    </head>
+<!--   
  <div class="container">
 <a href="admin.html"  class="btn btn-primary" id="register">Admin Dashboard</a>
 <hr>
@@ -20,7 +20,109 @@
 <hr>
 <a href="vote.html"  class="btn btn-primary" id="register">Vote</a>
 
-</div>
+</div> -->
+<body id="page-top">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
+        <div class="sidebar-brand-icon rotate-n-15"><img class="rounded-circle img-fluid" height="70px" width="70px" src="assets_home/img/comm.jpg"></div>
+        <div class="container"><a class="navbar-brand" href="#page-top">BlockVote</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" data-toogle="collapse" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto text-uppercase">
+                        <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="admin.html">Admin</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="login.html">Vote Now</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#about">Instructions</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="register.html">Register</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url('assets_home/img/header-bg.jpg');">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in"><span>Welcome To BlockVote!</span></div>
+                <div class="intro-heading text-uppercase"><span>It's Nice To See an Aware Citizen</span></div><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" href="#services">Register Now</a></div>
+        </div>
+    </header>
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="text-uppercase">Instructions</h2>
+                    <h3 class="text-muted section-subheading">Let's have a look at the voting process here.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-group timeline">
+                        <li class="list-group-item">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets_home/img/about/manual-voting.png"></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Why BlockVote?</h4>
+                                    <h4 class="subheading">Can't physically go to a Polling Station?</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">It's common to be away from your voting contituency, be it for a job, studies or you're sick. 
+                                        There are several reasons that keep you from physically going to the voting booths. BlockVote provides a simple, hassle-free and safe solution.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item timeline-inverted">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets_home/img/about/online-registration.png"></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Month Before elections</h4>
+                                    <h4 class="subheading">Online Registration</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">A month prior to the day of the elections, you will be able to register yourself online. All you need to know
+                                        is your voter's id, access to your verified email account and a metamask account. Registrations will close strictly one day before the elections.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets_home/img/about/online-voting.png"></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>On Election Day</h4>
+                                    <h4 class="subheading">Vote Online!</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Just like physical voting booths, the voting window will be open for 24 hours, before which and after which voting 
+                                        will be disabled. Anytime within these 24 hours, you can take a minute to vote by the press of a button from the comfort of your home.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item timeline-inverted">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets_home/img/about/positive-vote.png"></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Post Elections</h4>
+                                    <h4 class="subheading">Results</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Once the online votes and the physical votes are converged and counted, you'll have the results. </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>Be a good<br>&nbsp;Citizen<br>&nbsp;VOTE!</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="assets_home/js/jquery.min.js"></script>
+    <script src="assets_home/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets_homes/js/agency.js"></script>
 <!-- adding firebase proj-->
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -46,10 +148,8 @@
   firebase.initializeApp(firebaseConfig);
 
 </script>
+<!-- <script src="./js/bootstrap.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
-<script src="./js/bootstrap.min.js"></script>
-<!--<script src="./js/web3.min.js"></script>-->
 <script src="./js/truffle-contract.js"></script>
 <script src="./js/app.js"></script>
 </body>

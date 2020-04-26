@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-flex">
+                        <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;assets/img/register.jpg&quot;);"></div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h4 class="text-dark mb-4">Register to Vote!</h4>
+                            </div>
+                            <form onSubmit="App.checkOTP(); return false;" class="user">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="Voterid" placeholder="Valid Voter's ID"></div>
+                                    <div class="col-sm-6"><button onclick="App.checkRegistration(); return false;" class="btn btn-primary btn-block text-white btn-user" id="genOTP" type="submit">Send OTP</button></div>
+                                </div>
+                                <div class="form-group"><input class="form-control form-control-user" type="text" id="otp" aria-describedby="emailHelp" placeholder="Enter the OTP" name="otp"></div>
+                                <button class="btn btn-primary btn-block text-white btn-user" type="submit">Register Account</button>
+                            </form>
+                            <div class="text-center"><a class="small" href="#" onclick="App.resendOTP(); return false;"  id="resendOTP">Resend OTP?</a></div>
+                            <!-- <div class="text-center"><a class="small" href="login.html">Already have registered? Login!</a></div> -->
+
+                            <div>
+                                    <span id="instruction"></span>
+                                    <br>
+                                    <span id="secret_msg"> </span>
+                                    <br>
+                                    <span id="secret_no"> </span>
+                                    <br>
+                                    </div>
+                                    <a href="#" onclick="App.secretEmail()" class="btn btn-primary" id="genOTP">Send Mail</a>
+                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCkEtyqE9vpFy4tQe5YLk1ce20m7CDuP9w",
+    authDomain: "nodemail-63bf8.firebaseapp.com",
+    databaseURL: "https://nodemail-63bf8.firebaseio.com",
+    projectId: "nodemail-63bf8",
+    storageBucket: "nodemail-63bf8.appspot.com",
+    messagingSenderId: "428804642507",
+    appId: "1:428804642507:web:43c8377a4f0c608faaad4e"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+
+<!-- <script src="./js/bootstrap.min.js"></script> -->
+<script src="./js/web3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="./js/truffle-contract.js"></script>
+<script src="./js/app.js"></script>
+    <!-- <script src="assets/js/jquery.min.js"></script> -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
