@@ -790,6 +790,9 @@ var edo = new Date(evd);
 // var eo= edo.toUTCString();
 var s= Date.UTC(sdo.getUTCFullYear(),sdo.getUTCMonth(),sdo.getUTCDate(),sdo.getUTCHours(),sdo.getUTCMinutes());
 var e= Date.UTC(edo.getUTCFullYear(),edo.getUTCMonth(),edo.getUTCDate(),edo.getUTCHours(),edo.getUTCMinutes());
+if (s>=e) alert("Invalid date and time selected")
+else
+{
 await App.voting.setDates(s/1000.0,e/1000.0);
 // App.startDate=svd;
 // App.endDate=evd;
@@ -797,6 +800,7 @@ console.log("start"+ await App.voting.startVote())
 console.log("end" + await App.voting.endVote())
 console.log("current" + currentTime)
 //console.log(sdo.getUTCFullYear(),sdo.getUTCMonth(),sdo.getUTCDate(),sdo.getUTCHours(),sdo.getUTCMinutes())
+}
 }
 
 

@@ -56,7 +56,7 @@ contract evote {
     }
 
     function setDates (uint startv,uint endv) public{
-        if (msg.sender != admin) return;
+        if (msg.sender != admin || startv>=endv) return;
         startVote=startv;
         endVote=endv;
     }
