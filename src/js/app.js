@@ -387,7 +387,21 @@ $("#ID").html("Your Account ID: "+account);
 //await App.voting.registerToVote(r);
 }
  },
+modalDisplayVote: async()=>{
+  // Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("loginvote");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+},
  checkLogin: async()=>{
   var account = web3.currentProvider.selectedAddress
   var r = document.getElementById("vvid").value;
@@ -409,7 +423,8 @@ $("#ID").html("Your Account ID: "+account);
   //v[3]==true && v[0] == x[0] && 
   if(currentTime>svd && currentTime<=evd)
    {
-     if(x[0]==r)
+     if(v[3]==false) alert("You are not registered")
+     else if(x[0]==r)
      {
   if (v[3]==true && hash_new == x[1])
   {
@@ -427,12 +442,13 @@ $("#ID").html("Your Account ID: "+account);
     if(App.login_attempts==0)
     {
      alert("No Login Attempts Available");
+      document.getElementById("loginDiv").style.display = "none";
+      document.getElementById("blocked").style.display = "block";
       document.getElementById("vvid").disabled=true;
       document.getElementById("sec_msg").disabled=true;
       document.getElementById("sec_num").disabled=true;
       document.getElementById("login").disabled=true;
-      document.getElementById("loginDiv").style.display = "none";
-      document.getElementById("blocked").style.display = "block";
+      
     }
     else
     {
@@ -652,9 +668,25 @@ getseconds: async()=> {
   //from total seconds remaining 
   return App.secs - Math.round(App.mins * 60); 
 } ,
+modalDisplay: async()=>{
+  // Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("register");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+},
 checkOTP: async()=>
-{var vid = document.getElementById("Voterid").value;
+{
+  //console.log(document.getElementById("rModal"));
+  var vid = document.getElementById("Voterid").value;
   var docRef = App.db.collection("orders").doc(vid);
 
   docRef.get().then(async(doc)=> {
