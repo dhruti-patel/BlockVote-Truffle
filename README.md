@@ -6,10 +6,10 @@ transparency in the voting process.It will also make voting a possibility for vo
 in the geographical region at large to also participate in the elections.
 
 Prerequisites:
-metamask extension in your browser (browser must be compatible with metamask)
-Nodejs
-Ganache
-Truffle
+1. metamask extension in your browser (browser must be compatible with metamask)
+2. Nodejs
+3. Ganache
+4. Truffle
 
 Steps to run the project:
 1. Download the github repo
