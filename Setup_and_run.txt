@@ -7,6 +7,8 @@ Truffle
 Steps to run the project:
 1. Download the github repo
 2. run "npm install" in your project directory
-4. run truffle compile
-5. run truffle migrate
-3. run "npm run dev" to start the project in your browser
+3. keep Ganache application running in background on "http://127.0.0.1:7545" RPC Server 
+4. run "truffle migrate"
+5. run "truffle compile"
+6. run "npm run dev" to start the project in your browser on "http://localhost:3000/"
+7. connect and transfer your ganache accounts to your metamask
